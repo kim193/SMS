@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>Student Management System</header>
+    <div class="container">
+        <h2>Add Student</h2>
+        <input type="text" id="name" placeholder="Enter Student Name">
+        <input type="text" id="roll" placeholder="Enter Roll Number">
+        <button onclick="addStudent()">Add Student</button>
+        
+        <h2>Student List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+                
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function addStudent() {
+            let name = document.getElementById('name').value;
+            let roll = document.getElementById('roll').value;
+            if(name === "" || roll === "") {
+                alert("Please enter both name and roll number");
+                return;
+            }
+            
+            let table = document.getElementById("studentList");
+            let row = table.insertRow();
+            row.insertCell(0).innerText = name;
+            row.insertCell(1).innerText = roll;
+            let actionCell = row.insertCell(2);
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete";
+            deleteBtn.style.backgroundColor = "#dc3545";
+            deleteBtn.style.color = "white";
+            deleteBtn.onclick = function() { table.deleteRow(row.rowIndex - 1); };
+            actionCell.appendChild(deleteBtn);
+            
+            document.getElementById('name').value = "";
+            document.getElementById('roll').value = "";
+        }
+    </script>
+</body>
+</html>
